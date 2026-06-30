@@ -1,4 +1,4 @@
-# Obstacle Avoiding Car using Arduino Uno
+#                   Obstacle Avoiding Car using Arduino Uno
 
 An autonomous obstacle-avoiding robot built with Arduino Uno, an ultrasonic sensor mounted on a servo, and an L298N motor driver. The car continuously scans the path ahead, detects obstacles in real time, and intelligently decides whether to turn left, right, or reverse and U-turn based on available space.
 
