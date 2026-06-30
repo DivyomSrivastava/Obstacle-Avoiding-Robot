@@ -86,7 +86,8 @@ The entire system runs on an **11.1V battery pack**, stepped down via a buck con
 
 ## 🤖 Robot Image
 
-*(Add robot image here)*
+<img width="900" height="1600" alt="image" src="https://github.com/user-attachments/assets/6108f449-7f12-499e-8602-14f2ff5489d0" />
+
 
 ## 💻 Software Implementation
 
