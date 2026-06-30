@@ -1,95 +1,79 @@
-# Obstacle-Avoiding-Robot
-📖 Project Overview
+# Obstacle Avoiding Car using Arduino Uno
 
-This project demonstrates a 4WD autonomous obstacle-avoiding robot built using an Arduino Uno, L298N motor driver, HC-SR04 ultrasonic sensor, and an SG90 servo motor. The robot continuously monitors the path ahead and navigates around obstacles by scanning both the left and right directions to determine the safest route.
+An autonomous obstacle-avoiding robot built with Arduino Uno, an ultrasonic sensor mounted on a servo, and an L298N motor driver. The car continuously scans the path ahead, detects obstacles in real time, and intelligently decides whether to turn left, right, or reverse and U-turn based on available space.
 
-✨ Features
+## Features
 
-Autonomous obstacle detection and avoidance.
-4WD differential drive system.
-Real-time distance measurement using an ultrasonic sensor.
-Servo-based left and right environmental scanning.
-Intelligent path selection based on available space.
-Automatic reverse before changing direction.
-Modular and easy-to-understand Arduino code.
-Low-cost and expandable design.
+- Real-time obstacle detection using ultrasonic sensing
+- Servo-mounted sensor to scan left and right before deciding direction
+- Smart decision-making: compares left vs right clearance and picks the path with more space
+- Reverse and U-turn handling when both sides are blocked
+- Re-validation after turning to confirm the new path is actually clear
+- Fully autonomous — no remote or manual control required
 
+## Components Used
 
-🛠 Methodology
+| Component | Quantity |
+|---|---|
+| Arduino Uno | 1 |
+| HC-SR04 Ultrasonic Sensor | 1 |
+| SG90 Servo Motor | 1 |
+| L298N Motor Driver Module | 1 |
+| BO Motors (DC Gear Motors) | 4 (2 pairs) |
+| Robot Chassis with Wheels | 1 |
+| Battery Pack (7.4V–12V) | 1 |
+| Jumper Wires | As required |
 
-The robot continuously moves forward while measuring the distance to obstacles using the ultrasonic sensor.
+## Working Principle
 
-When an object is detected within the predefined threshold (15 cm), the robot:
+The ultrasonic sensor measures distance by emitting a sound pulse and timing how long it takes to bounce back from an object. This distance is calculated using the standard formula `distance = (duration × speed of sound) / 2`.
 
-Stops immediately.
-Moves backward slightly.
-Rotates the ultrasonic sensor to scan the left and right sides.
-Compares the measured distances.
-Turns toward the direction with more free space.
-Continues moving forward.
+The Arduino continuously checks the distance to the nearest obstacle directly ahead. If the path is clear (distance greater than a defined threshold), the car moves forward. If an obstacle is detected within the threshold, the car stops, reverses slightly, and triggers the servo to sweep the ultrasonic sensor left and right to measure clearance on both sides. Based on which side has more open space, the car turns in that direction; if both sides are blocked, it performs a U-turn. After turning, it re-checks the distance to confirm the new path is safe before resuming forward motion.
 
-This process repeats continuously, allowing the robot to navigate autonomously.
+## Methodology
 
+1. Initialize all pins, attach the servo, and center it to face forward.
+2. Continuously measure front distance using the ultrasonic sensor.
+3. If distance > threshold → move forward.
+4. If distance ≤ threshold → stop, reverse briefly, then:
+   - Sweep servo to scan left, measure distance.
+   - Sweep servo to scan right, measure distance.
+   - Return servo to center.
+5. Compare left and right readings:
+   - Both blocked → reverse turn (U-turn).
+   - Left more open → turn left.
+   - Right more open → turn right.
+6. After turning, re-measure distance to confirm clearance; if still blocked, correct by turning the opposite way.
+7. Repeat the loop continuously.
 
-🔩 Components Used
-| Component                 |   Quantity  |
-| ------------------------- | :---------: |
-| Arduino Uno               |      1      |
-| L298N Motor Driver        |      1      |
-| HC-SR04 Ultrasonic Sensor |      1      |
-| SG90 Servo Motor          |      1      |
-| BO DC Gear Motors         |      4      |
-| Robot Chassis             |      1      |
-| Wheels                    |      4      |
-| Li-ion Battery Pack       |      1      |
-| Jumper Wires              | As Required |
+## Assembly Overview
 
+- Mount the two BO motor pairs on the chassis and connect them to the L298N driver's two output channels.
+- Connect the L298N's ENA/ENB to PWM pins and IN1–IN4 to digital pins on the Arduino for speed and direction control.
+- Mount the servo motor at the front of the chassis and attach the ultrasonic sensor on top of the servo horn so it can rotate to scan the surroundings.
+- Connect the ultrasonic sensor's TRIG and ECHO pins to digital pins on the Arduino.
+- Power the Arduino and motor driver using a separate battery pack, ensuring a common ground between the Arduino, battery, and L298N.
+- (Circuit diagram to be added — see `circuit-diagram` in this repository.)
 
-⚙️ Working Principle
+## Software Implementation
 
-The Arduino continuously receives distance measurements from the ultrasonic sensor. When no obstacle is detected, the robot moves forward.
+The firmware is written in Arduino C++ using the built-in `Servo` library for sensor sweeping and direct digital/PWM control for the L298N driver.
 
-If an obstacle is detected within the set distance, the robot reverses slightly and scans both sides using the servo-mounted ultrasonic sensor. After comparing the available space on the left and right, it turns toward the clearer path and resumes forward movement.
+Key functions:
+- `getDistance()` — triggers the ultrasonic sensor and calculates distance from echo duration.
+- `forward()`, `backward()`, `leftTurn()`, `rightTurn()`, `stopMotors()` — control motor direction and speed via the L298N.
+- `avoidObstacle()` — core decision-making routine that reverses, scans both sides, compares distances, and executes the appropriate turn.
+- `loop()` — continuously checks the front distance and calls either `forward()` or `avoidObstacle()`.
 
-This simple decision-making process enables autonomous navigation in indoor environments.
+The full source code is available in [`obstacle_avoiding_car.ino`](./obstacle_avoiding_car.ino).
 
+## Future Improvements
 
-💻 Software Implementation
+- Add Bluetooth/Wi-Fi module for manual override and remote monitoring
+- Implement PID-based speed control for smoother turns
+- Add a buzzer/LED indicator for obstacle alerts
+- Map and log obstacle data for path optimization
 
-The robot is programmed using the Arduino IDE in Embedded C++.
+## Author
 
-Main Software Modules:
-1. Motor Control
-2. Ultrasonic Distance Measurement
-3. Servo Position Control
-4. Obstacle Detection
-5. Path Selection Logic
-6. Autonomous Navigation
-
-Navigation Logic
-
-Move Forward
-      │
-Obstacle Detected?
-      │
- ┌────┴────┐
- │         │
-No        Yes
- │         │
- ▼         ▼
-Continue  Stop
-           │
-           ▼
-     Reverse Slightly
-           │
-           ▼
-     Scan Left & Right
-           │
-           ▼
-   Select Clearer Path
-           │
-           ▼
-      Turn & Continue
-
-
-      
+Built as a hands-on robotics and embedded systems project demonstrating sensor integration, real-time decision-making, and motor control with Arduino.
