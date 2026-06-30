@@ -75,10 +75,8 @@ Continue  Stop
 
 ## 🔌 Block Diagram
 
-```
-<img width="2720" height="2480" alt="obstacle_car_block_diagram" src="https://github.com/user-attachments/assets/9234e9f1-c6ba-4260-a0fb-3cc784db4030" />
+<img width="2720" height="2480" alt="obstacle_car_block_diagram" src="https://github.com/user-attachments/assets/b3bab5ec-b1f7-44c3-9880-805cf0ede09f" />
 
-```
 
 The entire system runs on an **11.1V battery pack**, stepped down via a buck converter to power the Arduino Uno and logic circuitry. The Arduino reads input from the ultrasonic sensor (positioned via the servo) and sends direction commands to the L298N motor driver, which drives the two DC motor pairs directly from the 11.1V supply.
 
