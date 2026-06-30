@@ -108,5 +108,10 @@ Key functions:
 - Map and log obstacle data for path optimization
 
 ## 👨‍💻 Author
+**Divyom Srivastava**
+
+B.Tech in Computer Science & Engineering
 
 Built as a hands-on robotics and embedded systems project demonstrating sensor integration, real-time decision-making, and motor control with Arduino.
+
+⭐ If you found this project useful, consider giving it a star!
