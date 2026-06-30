@@ -107,6 +107,6 @@ Key functions:
 - Add a buzzer/LED indicator for obstacle alerts
 - Map and log obstacle data for path optimization
 
-## Author
+## 👨‍💻 Author
 
 Built as a hands-on robotics and embedded systems project demonstrating sensor integration, real-time decision-making, and motor control with Arduino.
