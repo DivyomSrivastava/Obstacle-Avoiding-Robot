@@ -98,7 +98,6 @@ Key functions:
 - `avoidObstacle()` — core decision-making routine that reverses, scans both sides, compares distances, and executes the appropriate turn.
 - `loop()` — continuously checks the front distance and calls either `forward()` or `avoidObstacle()`.
 
-The full source code is available in [`obstacle_avoiding_car.ino`](./obstacle_avoiding_car.ino).
 
 ## Future Improvements
 
