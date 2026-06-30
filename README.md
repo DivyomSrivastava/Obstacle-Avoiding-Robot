@@ -11,7 +11,7 @@ An autonomous obstacle-avoiding robot built with Arduino Uno, an ultrasonic sens
 - Re-validation after turning to confirm the new path is actually clear
 - Fully autonomous — no remote or manual control required
 
-## Components Used
+## 🔩 Components Used
 
 | Component | Quantity |
 |---|---|
