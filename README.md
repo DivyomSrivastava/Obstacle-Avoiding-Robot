@@ -3,7 +3,8 @@
 
 This project demonstrates a 4WD autonomous obstacle-avoiding robot built using an Arduino Uno, L298N motor driver, HC-SR04 ultrasonic sensor, and an SG90 servo motor. The robot continuously monitors the path ahead and navigates around obstacles by scanning both the left and right directions to determine the safest route.
 
-#✨ Features
+
+✨ Features
 
 Autonomous obstacle detection and avoidance.
 4WD differential drive system.
@@ -53,14 +54,43 @@ If an obstacle is detected within the set distance, the robot reverses slightly 
 
 This simple decision-making process enables autonomous navigation in indoor environments.
 
+
 💻 Software Implementation
 
 The robot is programmed using the Arduino IDE in Embedded C++.
 
-Main Software Modules
-Motor Control
-Ultrasonic Distance Measurement
-Servo Position Control
-Obstacle Detection
-Path Selection Logic
-Autonomous Navigation
+Main Software Modules:
+1. Motor Control
+2. Ultrasonic Distance Measurement
+3. Servo Position Control
+4. Obstacle Detection
+5. Path Selection Logic
+6. Autonomous Navigation
+
+Navigation Logic
+
+Move Forward
+      │
+Obstacle Detected?
+      │
+ ┌────┴────┐
+ │         │
+No        Yes
+ │         │
+ ▼         ▼
+Continue  Stop
+           │
+           ▼
+     Reverse Slightly
+           │
+           ▼
+     Scan Left & Right
+           │
+           ▼
+   Select Clearer Path
+           │
+           ▼
+      Turn & Continue
+
+
+      
