@@ -108,7 +108,7 @@ Key functions:
 - Map and log obstacle data for path optimization
 
 ## 👨‍💻 Author
-**Divyom Srivastava(https://www.linkedin.com/in/divyom-srivastava-260b95342/)**
+**Divyom Srivastava (https://www.linkedin.com/in/divyom-srivastava-260b95342/)**
 
 B.Tech in Computer Science & Engineering
 
